@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/css" href="style/style.css"?>
+<odoo>
+<!-- creation form view -->
+<record model="ir.ui.view" id="projet_form_templates">
+        <field name="name">Projets form</field>
+        <field name="model">projetprojet</field>
+	<field name="arch" type="xml">
+            <form name="name_projet" id="fiche_projet">
+		<header>
+		<!-- workflow bouton de gauche pour le faire avancer-->
+		<!-- "groups" correspond a quelle groupes les boutons seront visible par l'utilisateur-->
+		<!-- "attrs" correspond a quelle moment les boutons seront visible : le bouton x est invisible expecter si "Etapes" n'est pas dans y-->
+		   <button name="action_etude" type="object" string="Etude" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Nouveau')]}"  groups="project_pist_v1.group_user_project" confirm="Voulez-vous valider le projet a l'étape 'Etude'?" options="{}"/>
+		   <button name="action_refuse" type="object" string="Refusé" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Nouveau')]}"  groups="project_pist_v1.group_user_project" confirm="Etes-vous sûr de vouloir refuser?" options="{}"/>
+		   <button name="action_valider" type="object" string="Validé" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Etude')]}"  groups="project_pist_v1.group_user_project" confirm="Etes-vous sûr de vouloir valider le projet?" options="{}"/>
+		   <button name="action_refuser" type="object" string="Refusé" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Etude')]}"  groups="project_pist_v1.group_user_project" confirm="Etes-vous sûr de vouloir refuser ?" options="{}"/>
+		   <button name="action_cloture" type="object" string="Cloture" class="oe_highlight" attrs="{'invisible':[('Etapes','not in','Validé')]}"  groups="project_pist_v1.group_user_project" confirm="Etes-vous sûr de vouloir cloturer ?" options="{}"/>
+		   <button name="action_admin" type="object" string="Retour" class="oe_highlight" attrs="{'invisible':[('Etapes','in','Nouveau')]}" groups="project_pist_v1.group_user_admin" confirm="Etes-vous sûr de vouloir revenir en arrière ?" options="{}"/>
+		   <field name="Etapes" widget="statusbar" statusbar_visible="Nouveau,Etude,Validé,En cour,Cloture"/>
+		</header>
+		<sheet>
+		<!--status du projet-->
+		<!-- "bg_color" sert a choisir la couleur desirer pour le status du projet-->
+		<!-- "attrs" sert a définir a quelle moment le status change de couleur-->
+		<widget name="web_ribbon" title="Cloture" bg_color="bg-danger" attrs ="{'invisible':[('Etapes', '!=', 'Cloture')]}"/>
+		<widget name="web_ribbon" title="Validé" bg_color="bg-success" attrs ="{'invisible':[('Etapes', '!=', 'Validé')]}"/>
+		<widget name="web_ribbon" title="En cours" bg_color="bg-success" attrs ="{'invisible':[('Etapes', '!=', 'En cours')]}"/>
+		<widget name="web_ribbon" title="Etude" bg_color="bg-primary" attrs ="{'invisible':[('Etapes', '!=', 'Etude')]}"/>
+		<widget name="web_ribbon" title="Brouillon" bg_color="bg-warning" attrs ="{'invisible':[('Etapes', '!=', 'Nouveau')]}"/>
+		<!--champ pour le nom du projet-->
+		<group>
+		<group>
+			<div class="mt0" modifier="{}">
+			<field name="projet_image" widget="image"/>
+			</div>
+		<!--differents champs principaux dans le projet qui apparaissent au début-->
+		</group>
+		<group>
+<!-- class "mt0" permet d'enlever le champ de description a gauche du champ a remplir-->
+		<h1 class="mt0" modifiers="{}">
+			<field name="name_projet" placeholder="Nom du projet" readonly="False"  modifiers="{'readonly':false,'required':true}"/>
+		</h1>
+		</group>
+		<group>
+<!-- permet de changer de champ statut en fonction des etapes du workflow-->
+		<field name="status" attrs ="{'invisible':[('Etapes', '!=', 'Nouveau')]}"/>
+		<field name="annee_etude"  attrs ="{'invisible':[('Etapes', '!=', 'Etude')]}"/>
+		<field name="annee_refuse"  attrs ="{'invisible':[('Etapes', '!=', 'Refusé')]}"/>
+		<field name="annee_refuse"  attrs ="{'invisible':[('Etapes', '!=', 'refuse1')]}"/>
+		<field name="annee_encours" attrs ="{'invisible':[('Etapes', '!=', 'Validé')]}"/>
+		<field name="annee_cloture" attrs ="{'invisible':[('Etapes', '!=', 'Cloture')]}"/>
+		<field name="service_project"/>
+		<field name="champ_action"/>
+		<field name="code_analytique" string="Code analytique"/>
+		<field name="annee_realisation"/>
+		</group>
+		<group>
+		<!--placeholder sert a placer un text en semi invisible le temps que le champ sois rempli-->
+		<field name="description_projet" string="Descriptif du projet" placeholder="descriptif..."/>
+		</group>
+		<group>
+		<field name="type_projet1"/>
+		<field name="company_id" required="1"  on_change="1" can_create="true" can_write="true"/>
+		<!-- budget annuel que l'on ne peux pas toucher et modifier-->
+		<!-- le label street est pour la mise en forme de budget et son année-->
+		<label for="street" string="Budget prévisionnel" modifiers="{}"/>
+                        <div class="o_address_format" modifiers="{}">
+				<pre><b><field name="annee_actuel" string="Budget prévisionnel" readonly="True"/>
+		<!-- le nom tab sert a faire une tabulation entre le budget et l'année-->
+				<string name="tab"> :  &#160;&#160;</string>
+		<!-- le champ "options" sert a mettre le budget par default en euros-->
+				<field name="budget_annee_actuel" widget="monetary" options="{'currency_id': %(base.europe)d}"  readonly="True"/>
+				</b></pre>
+				<pre><b><field name="date_to" string="Budget" readonly="True"/>
+                                <string name="tab"> :  &#160;&#160;</string>
+                                <field name="budget_annee_dernier" widget="monetary" options="{'currency_id': %(base.europe)d}"  readonly="True"/>
+                                </b></pre>
+            </div>
+		</group>
+		<group>
+		<field name="zone_geographique"/>
+		<!-- cette class permet de lister les differents choix de pays-->
+		<field name="country_id1" placeholder="pays" class="o_address_country" options="{'no_open': True, 'no_create': True}" can_create="true" can_write="true" modifiers="{}"/>
+		</group>
+		</group>
+	<notebook>
+	<!-- page Infos-->
+		<page string="Infos">
+		<group>
+		<group>
+		<!-- "separator" sert a mettre la string en Titre et en gros-->
+			<separator string="Adresse du projet" modifiers="{}"/>
+			<tr>
+			</tr>
+			<field name="localisation_geo"/>
+			<field name="adresse_postale" placeholder="adresse postale" string="Adresse postale"/>
+    			<field name="ville" placeholder="ville" string="Ville"/>
+    			<field name="departement" placeholder="département" string="Département"/>
+			<field name="country_id1" placeholder="Pays" class="o_address_country" options="{'no_open': True, 'no_create': True}" required="0" can_create="true" can_write="true"  modifiers="{}"/>
+			<field name="longitude"/>
+			<field name="latitude"/>
+ 			<field name="link_coord"  string="Lien google map" widget="url" text="google map"/>
+		</group>
+		<group>
+			<separator string="Historique du projet" modifier="{}"/>
+			<tr>
+			</tr>
+			<field name="date"/>
+		        <field name="user_id"/>
+			<field name="histoire_project" placeholder="écrire son histoire..."/>
+		</group>
+                <group>
+                	<separator string="Contexte socio-politique" modifier="{}"/>
+               		<tr>
+                	</tr>
+			<field name="context_ville" string="Ville" placeholder="contexte socio-politique de la ville"/>
+    			<field name="context_pays" string="Pays" placeholder="contexte socio-politique du pays"/>
+		</group>
+		</group>
+		</page>
+		<!-- Page Beneficiaires-->
+		<page string="Bénéficaires">
+		<group>
+		<group>
+		<separator string="Nombre de Bénéficiaires"/>
+		<label for="street" string="Bénéficiaire direct" modifiers="{}"/>
+                        <div class="o_address_format" modifiers="{}">
+                                <pre><b><field name="annee_actuel" string="Budget pr  visionnel" readonly="True"/>
+                <!-- le nom tab sert a faire une tabulation entre le budget et l'ann  e-->
+                                <string name="tab"> :  &#160;&#160;</string>
+                <!-- le champ "options" sert a mettre le budget par default en euros-->
+                                <field name="direct_nbr_present" options="{'currency_id': %(base.europe)d}"  readonly="True"/>
+                                </b></pre>
+                                <pre><b><field name="date_to" string="Budget" readonly="True"/>
+                                <string name="tab"> :  &#160;&#160;</string>
+                                <field name="direct_nbr_passee" options="{'currency_id': %(base.europe)d}"  readonly="True"/>
+                                </b></pre>
+            		</div>
+		</group>
+		<group>
+				<label for="street" string="Bénéficiaire indirect" modifiers="{}"/>
+                        <div class="o_address_format" modifiers="{}">
+                                <pre><b><field name="annee_actuel" string="Budget pr  visionnel" readonly="True"/>
+                <!-- le nom tab sert a faire une tabulation entre le budget et l'ann  e-->
+                                <string name="tab"> :  &#160;&#160;</string>
+                <!-- le champ "options" sert a mettre le budget par default en euros-->
+                                <field name="indirect_nbr_present" options="{'currency_id': %(base.europe)d}"  readonly="True"/>
+                                </b></pre>
+                                <pre><b><field name="date_to" string="Budget" readonly="True"/>
+                                <string name="tab"> :  &#160;&#160;</string>
+                                <field name="indirect_nbr_passee" options="{'currency_id': %(base.europe)d}"  readonly="True"/>
+                                </b></pre>
+            		</div>
+		</group>
+		</group>
+			<field name="beneficiaire_list_lines">
+			<!-- tree editable permet de choisir et de completer les champ directements dans le tableau et ne pas faire apparaitre une fenetre-->
+			<tree editable="bottom">
+			<field name="annee"/>
+			<field name="the_contact_id"/>
+			<field name="type"/>
+			<field name="champ_action"/>
+			<field name="nombre"/>
+			<field name="activite"/>
+			</tree>
+			</field>
+		</page>
+		<!-- page contact-->
+                <page string="Contact">
+                <field name="contact_list_lines">
+			<tree editable="bottom">
+			<field name="the_contact_id1"/>
+			<field name="organisation"/>
+			<field name="contact_represent1"/>
+			<field name="the_contact_id" invisible="1"/>
+			<field name="begin_date"/>
+			<field name="end_date"/>
+			</tree>
+		</field>
+		</page>
+		<!-- page cordonnee-->
+                <page string="Coordonnées">
+		<!-- "separator" sert a mettre la string en Titre et en gros-->
+		<group>
+			<separator string="Structure partenaire" modifiers="{}"/>
+			<tr>
+			</tr>
+			<group modifiers="{}">
+			<field name="company_id" required="0"  on_change="1" can_create="true" can_write="true"/>
+			<label for="street" string="Adresse" modifiers="{}"/>
+			<div class="o_address_format" modifiers="{}">
+							<field name="street" placeholder="Village..." class="o_address_street" modifiers="{}"/>
+							<field name="city" placeholder="Arrondissement" class="o_address_city" modifiers="{}"/>
+							<field name="zip" placeholder="Code postale" class="o_address_zip" modifiers="{}"/>
+							<field name="country_id" placeholder="Pays" class="o_address_country" required="0"  modifiers="{}"/>
+						        <field name="phone" placeholder="Téléphone" string="Téléphone"/>
+							<field name="email" string="Adresse email"/>
+			</div>
+			</group>
+			<group>
+		        <field name="tel_project" placeholder="téléphone" string="Téléphone"/>
+			<field name="adresse_email" placeholder="email" string="Adresse email"/>
+			</group>
+			<group>
+			<separator string="Responsable du projet" modifiers="{}"/>
+			<tr>
+			</tr>
+			<field name="nom_resp"/>
+			<field name="tel_resp"/>
+			<field name="adresse_resp"/>
+			</group>
+			</group>
+                </page>
+			<!-- page budget-->
+		<page string="Budget">
+		<field name="budget_list_lines">
+                <tree editable="bottom">
+			<field name="the_budget_id" invisible="1"/>
+			<field name="annee"/>
+			<field name="demande" widget="monetary" options="{'currency_id': %(base.europe)d}" />
+                        <field name="commission_date"/>
+                        <field name="valider" widget="monetary" options="{'currency_id': %(base.europe)d}" />
+			<field name="budget_ajuste" widget="monetary" options="{'currency_id': %(base.europe)d}"/>
+			<field name="zone_text"/>
+			<field name="depasser" widget="monetary" options="{'currency_id': %(base.europe)d}" />
+                </tree>
+                </field>
+		</page>
+		<!-- page versement-->
+		<page string="Versements">
+		<!-- le "context" permet de grouper les element du tableau par le champ date-->
+      		<group>
+		<group>
+		<label for="street" string="Total versé" modifiers="{}"/>
+                        <div class="o_address_format" modifiers="{}">
+                                <pre><b><field name="annee_actuel" string="Budget pr  visionnel" readonly="True"/>
+                <!-- le nom tab sert a faire une tabulation entre le budget et l'ann  e-->
+                                <string name="tab"> :  &#160;&#160;</string>
+                <!-- le champ "options" sert a mettre le budget par default en euros-->
+                                <field name="get_verse_2020" widget="monetary" options="{'currency_id': %(base.europe)d}"  readonly="True"/>
+                                </b></pre>
+                                <pre><b><field name="date_to" string="Budget" readonly="True"/>
+                                <string name="tab"> :  &#160;&#160;</string>
+                                <field name="get_verse_2019" widget="monetary" options="{'currency_id': %(base.europe)d}"  readonly="True"/>
+                                </b></pre>
+            		</div>
+		</group>
+		</group>
+		<field name="versement_list_lines" domain="[]" context="{'group_by': 'date'}">
+		<tree>
+		<field name="date"/>
+		<field name="annee_vers" string="Année budgetaire" />
+		<field name="object"/>
+		<field name="Ligne_budgetaire"/>
+		<field name="montant" widget="monetary"  options="{'currency_id': %(base.europe)d}" sum="Total"/>
+		</tree>
+		<form>
+		<group>
+			<group>
+			<field name="date"/>
+			<field name="montant" widget="monetary"  options="{'currency_id': %(base.europe)d}"/>
+			</group>
+			<group>
+			<field name="Ligne_budgetaire"/>
+			<field name="annee_vers" string="Année budgetaire" />
+			<field name="object"/>
+			</group>
+		</group>
+		</form>
+		</field>
+		<tr></tr>
+		<separator string="Montant versé par ligne budgétaire"/>
+                <tr></tr>
+                <field name="montant_vers_list_lines">
+		<tree editable="bottom">
+		<field name="annee"/>
+		<field name="ligne_budgetaire"/>
+		<field name="total_verse" widget="monetary"  options="{'currency_id': %(base.europe)d}"/>
+		</tree>
+		</field>
+                </page>
+		<!-- page notes-->
+                <page string="Notes">
+<!-- class permetant de recuperer tout les changements et modif dans le projet grace a l attribut onchange dans le python-->
+	<div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread" options="{'display_log_button': True}"/>
+		</div>
+
+		</page>
+		<!-- Page evenement-->
+                <page string="Evenements">
+		<field name="event_list_lines" domain="[]" context="{'group_by': 'date_debut'}">
+		<tree>
+		<field name="date_debut"/>
+		<field name="date_fin"/>
+		<field name="type_event"/>
+		<field name="object"/>
+		<field name="type_passage1"/>
+		<field name="description"/>
+		</tree>
+		<form>
+			<group>
+			<group>
+				<field name="date_debut"/>
+				<field name="date_fin"/>
+				<field name="type_passage1"/>
+				<field name="type_event"/>
+				<field name="object"/>
+			</group>
+			<group>
+				<field name="description"/>
+			</group>
+			</group>
+		</form>
+		</field>
+                </page>
+				<!-- page inventaire-->
+		<page string="Inventaire">
+                <separator string="Inventaire batiments/terrains"/>
+                <tr>
+                </tr>
+		<field name="batiments_list_lines">
+		<tree editable="bottom">
+		<field name="nature"/>
+		<field name="date_aqui"/>
+		<field name="couts_achat" widget="monetary" options="{'currency_id': %(base.europe)d}"/>
+		<field name="fonction1"/>
+		<field name="etat1"/>
+		</tree>
+		</field>
+	        <separator string="Inventaire du matériel roulant"/>
+                <tr>
+                </tr>
+		<field name="materiel_list_lines">
+		<tree>
+		<field name="date_aqui"/>
+   		<field name="type_vehicule1"/>
+		<field name="vehicule" string="Véhicule"/>
+   		<field name="Immatriculation" string="Immatriculation"/>
+		<field name="etat1"/>
+		<field name="kilometrages"/>
+		<field name="date_kilo"/>
+		<field name="entretien"/>
+		<field name="date_session"/>
+		<field name="prix_session" widget="monetary" options="{'currency_id': %(base.europe)d}"/>
+		<field name="acheteur"/>
+		<field name="commentaires"/>
+		</tree>
+		<form>
+		<group>
+		<group>
+		<field name="date_aqui"/>
+                <field name="vehicule" string="Véhicule"/>
+                <field name="Immatriculation" string="Immatriculation"/>
+                <field name="type_vehicule1"/>
+                <field name="etat1"/>
+		  <field name="kilometrages"/>
+		  <field name="date_kilo"/>
+		</group>
+		<group>
+                <field name="date_session"/>
+                <field name="prix_session"/>
+                <field name="acheteur"/>
+                <field name="entretien"/>
+                <field name="commentaires"/>
+		</group>
+		</group>
+		</form>
+		</field>
+                <separator string="Inventaire autre matériel"/>
+                <tr>
+                </tr>
+		<field name="mattechnique_list_lines">
+                <tree editable="bottom">
+                <field name="date_aqui"/>
+                <field name="type_materiel1"/>
+		<field name="nom"/>
+		<field name="nombre"/>
+                <field name="etat1"/>
+                </tree>
+                </field>
+		</page>
+		<!-- page evaluation-->
+                <page string="Evaluation">
+		<field name="evaluation_list_lines">
+		<tree>
+		<field name="annee"/>
+		<field name="objectif_fixer"/>
+		<field name="evaluation_milieu"/>
+		<field name="evaluation_fin"/>
+		<field name="resultat_evaluation"/>
+		</tree>
+		<form>
+			<group>
+		<field name="annee"/>
+                <field name="objectif_fixer"/>
+                <field name="evaluation_milieu"/>
+                <field name="evaluation_fin"/>
+                <field name="resultat_evaluation"/>
+			</group>
+		</form>
+		</field>
+                </page>
+		<!--Page sensible -->
+		<page string="Informations sensibles">
+		<field name="inf_sensible_list_lines">
+ 		<tree>
+ 		<field name="date"/>
+		<field name="sujet"/>
+		<field name="details"/>
+		</tree>
+		<form>
+		<group>
+	        <group>
+		<field name="date"/>
+                <field name="sujet"/>
+		</group>
+		<group>
+                <field name="details"/>
+		</group>
+		</group>
+		</form>
+		</field>
+		</page>
+		</notebook>
+		</sheet>
+	   </form>
+        </field>
+    </record>
+	<!-- tree view des differents projet-->
+<record model="ir.ui.view" id="projet_tree_templates">
+        <field name="name">Projets tree</field>
+        <field name="model">projetprojet</field>
+        <field name="arch" type="xml">
+		<!-- permet de choisir de la couleur pour la tree view en fonction du champs status-->
+            <tree decoration-primary="Etapes == 'Nouveau'" decoration-danger="Etapes == 'Cloture'"
+		  decoration-info="Etapes == 'Etude'"  decoration-success="Etapes == 'Validé'">
+                <field name="name_projet"/>
+                <field name="country_id1"/>
+                <field name="date"/>
+		<field name="Etapes"/>
+           </tree>
+        </field>
+    </record>
+<!-- modification du modele contact en inherit-->
+<record id="view_partner_form_inherit" model="ir.ui.view">
+	<field name="name">res.partner.inherit</field>
+	<field name="model">res.partner</field>
+	<field name="inherit_id" ref="base.view_partner_form"/>
+	<field name="arch" type="xml">
+		<field name="vat" position="attributes">
+			<attribute name="invisible">1</attribute>
+		</field>
+		<page name="sales_purchases" position="attributes">
+			<attribute name="invisible">1</attribute>
+		</page>
+	</field>
+</record>
+
+<!-- different filtre et group concernant la tree view des projets-->
+<record id="projet_search_view" model="ir.ui.view">
+	<field name="name">projet.search.view</field>
+	<field name="model">projetprojet</field>
+	<field name="arch" type="xml">
+	         <search string="Search projet">
+		   <field name="name" filter_domain="['|', ('name_projet', 'ilike', self), ('country_id', 'ilike', self)]"/>
+                    <filter name="Brouillon" string="Brouillon" domain="[('status','=','Brouillon')]"/>
+                    <filter name="En cour" string="En cours" domain="[('status','=','En cour')]"/>
+                    <filter name="Confirmé" string="Confirmé" domain="[('status','=','Confirmer')]"/>
+                    <filter name="Annulé" string="Annulé" domain="[('status','=','Annuler')]"/>
+                    <separator/>
+					<!-- les filtres hier et aujourd hui sont en faites un encadrement de ce que je choisis de montrer par rapport au temps-->
+                    <filter name ="Aujourd'hui" string="Aujourd'hui" domain="[('date','&lt;=',time.strftime('%Y-%m-%d 23:59:59')),('date','&gt;=',time.strftime('%Y-%m-%d 00:00:00'))]"/>
+                    <filter name="Hier" string="Hier" domain="[('date','&lt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 23:59:59'))), ('date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')))]"/>
+            <!-- ceci sont les groups creer-->
+			<field name="user_id" string="Créateur de projet" context="{'group_by':'user_id'}"/>
+		    <field name="name_projet" string="Nom de projet" context="{'group_by':'name_projet'}"/>
+		    <field name="Etapes" string="Etapes" context="{'group_by':'Etapes'}"/>
+    		</search>
+	</field>
+</record>
+<!-- vue pivot des projets-->
+<record id="projet_pivot" model="ir.ui.view">
+	<field name="name">projetprojet.pivot</field>
+	<field name="model">projetprojet</field>
+	<field name="arch" type="xml">
+		<pivot>
+		<!-- row est la ligne voulu et col est la colone voule dans la vue pivot-->
+		<field name="name_projet" type="row" />
+		<field name="code_analytique" type="col" />
+		<field name="status" type="col" />
+		<field name="service_project" type="col" />
+		<field name="champ_action" type="col" />
+		<field name="annee_realisation" type="col" />
+		<field name="type_projet1" type="col" />
+		</pivot>
+	</field>
+</record>
+
+<!-- creation du module projet avec la possibilite de cree un projet-->
+	<record model="ir.actions.act_window" id="action_projet_button">
+	    <field name="name">Projets</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">projetprojet</field>
+	    <field name="view_mode">tree,form,pivot,search</field>
+            <field name="search_view_id" ref="projet_search_view"/>
+	    <field name="help" type="html">
+		<!-- cest une class pour mettre un bonhomme souriant quand aucun projet n a ete creer-->
+            <p class="o_view_nocontent_smiling_face">
+               Créer un nouveau projet
+            </p>
+        </field>
+    </record>
+	<!-- inherit du modele Document pour lier les deux modules-->
+        <record model="ir.actions.act_window" id="open_document">
+            <field name="name">Documents</field>
+            <field name="res_model">document</field>
+            <field name="view_mode">tree,form,pivot,graph,search</field>
+	    <field name="domain">[]</field>
+	   <field name="context">{}</field>
+    </record>
+
+	<!-- creation visuel de l'application ainsi que le menu projet-->
+	<menuitem id="projet_projet" name="Projets" sequence="0"/>
+	<menuitem id="projet_date" name="Créer" parent="projet_projet" action="action_projet_button"/>
+</odoo>

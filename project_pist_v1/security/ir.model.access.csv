@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_projetprojet,access.projetprojet,model_projetprojet,project_pist_v1.group_consulation,1,0,0,0
+access_projetprojet,access.projetprojet,model_projetprojet,project_pist_v1.group_user_terrain,1,1,1,1
+access_projetprojet_contact,access.projetprojet.contact,model_projetprojet_contact,group_user_terrain,1,1,1,1
+access_projetprojet_budget,access.projetprojet.budget,model_projetprojet_budget,group_user_terrain,1,1,1,1
+access_projetprojet_event,access.projetprojet.event,model_projetprojet_event,group_user_terrain,1,1,1,1
+access_projetprojet_versement,access.projetprojet.versement,model_projetprojet_versement,group_user_terrain,1,1,1,1
+access_projetprojet_evaluation,access.projetprojet.evaluation,model_projetprojet_evaluation,group_user_terrain,1,1,1,1
+access_projetprojet_materiel,access.projetprojet.materiel,model_projetprojet_materiel,group_user_terrain,1,1,1,1
+access_projetprojet_mattechnique,access.projetprojet.mattechnique,model_projetprojet_mattechnique,group_user_terrain,1,1,1,1
+access_projetprojet_batiments,access.projetprojet.batiments,model_projetprojet_batiments,group_user_terrain,1,1,1,1
+access_projetprojet_beneficiaire,access.projetprojet.beneficiaire,model_projetprojet_beneficiaire,group_user_terrain,1,1,1,1
+access_projetprojet_montant,access.projetprojet.montant,model_projetprojet_montant,group_user_terrain,1,1,1,1
+access_projetprojet_inf_sensible,access.projetprojet.inf_sensible,model_projetprojet_inf_sensible,group_user_terrain,1,1,1,1
+

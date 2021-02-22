@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<report 
+	id="report_fiche_projet"
+	string="Fiche Projet"
+	model="projetprojet"
+	report_type="qweb-pdf"
+	name="project_pist_v1.report_projet"
+	file="project_pist_v1.report_projet"/>
+
+	<report 
+	id="report_lettre_octroit"
+	string="Lettre octroit"
+	model="projetprojet"
+	report_type="qweb-pdf"
+	name="project_pist_v1.report_lettre"
+	file="project_pist_v1.report_lettre"/>
+
+	<report 
+	id="report_accord_part"
+	string="Accord de partenariat LEPR"
+	model="projetprojet"
+	report_type="qweb-pdf"
+	name="project_pist_v1.report_accord"
+	file="project_pist_v1.report_accord"/>
+
+	<report 
+	id="report_accord_part_enft"
+	string="Accord de partenariat ENFT"
+	model="projetprojet"
+	report_type="qweb-pdf"
+	name="project_pist_v1.report_accord_enft"
+	file="project_pist_v1.report_accord_enft"/>
+
+	<report 
+	id="report_avis_envoi"
+	string="Avis d’envoi de fonds ENFT"
+	model="projetprojet"
+	report_type="qweb-pdf"
+	name="project_pist_v1.report_envoi"
+	file="project_pist_v1.report_envoi"/>
+
+	<report 
+	id="report_avis_envoi_enft"
+	string="Avis d'envoi de fonds LEPR"
+	model="projetprojet"
+	report_type="qweb-pdf"
+	name="project_pist_v1.report_envoi_enft"
+	file="project_pist_v1.report_envoi_enft"/>
+
+</odoo>

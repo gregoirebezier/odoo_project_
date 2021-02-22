@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.module.category" id="module_category_projet">
+        <field name="name">Projet management</field>
+        <field name="description">Category for the Project</field>
+        <field name="sequence">45</field> 
+    </record>
+<!--
+    <record model="ir.rule" id="not_modify_etapes">
+	<field name="name">readonly Etapes</field>
+	<field name="model_id" ref="model_projetprojet"/>
+	<field name="domain_force">[('Etapes','=','invisible')]</field>
+	<field name="groups" eval="[4, ref('group_user_terrain')]" />
+    </record>
+-->
+    <record id="group_user_terrain" model="res.groups">
+        <field name="name">Utilisateur_Terrain</field>
+        <field name="category_id" ref="module_category_projet"/>
+        <field name="comment">Enable/Disable fields</field>
+ </record>
+
+    <record id="group_consulation" model="res.groups">
+        <field name="name">Utilisateur_Consulation</field>
+        <field name="category_id" ref="module_category_projet"/>
+    </record>
+
+    <record id="group_user_admin" model="res.groups">
+        <field name="name">Admin_Projet</field>
+        <field name="category_id" ref="module_category_projet"/>
+        <field name="implied_ids" eval="[(4, ref('group_user_terrain'))]"/>
+    </record>
+
+    <record id="group_user_project" model="res.groups">
+        <field name="name">Utilisateur_Projet</field>
+        <field name="category_id" ref="module_category_projet"/>
+        <field name="implied_ids" eval="[(4, ref('group_user_terrain'))]"/>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="report_envoi">
+        <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                        <t t-call="web.external_layout">
+        <style>
+.boxed {
+border: 1px solid black ;
+}
+	</style>
+	<div class="page">
+		<center><h4><b><u>FONDATION RAOUL FOLLEREAU/AIDE AUX ENFANTS EN DETRESSE <br></br>-BUDGET .............-</u></b></h4></center>
+		<br></br><p style="margin-left: 500px;">Paris le,</p>
+		<h5><b>1)Avis d’envoi de fonds</b></h5>
+                <div class="boxed">
+ 	           	<p>&#160;&#160; Destinataire:</p>
+			<p>&#160;&#160; Projet/Pays:</p>
+			<p>&#160;&#160; Notre référence du versement:</p>
+			<p>&#160;&#160; Motif:</p>
+			<p>&#160;&#160; Montant:</p>
+			<p>&#160;&#160; Banque:</p>
+			<p>&#160;&#160; Date du virement:</p>
+		</div>
+		<br></br><h5><b>2)Accusé de réception d’envoi de fonds</b></h5>
+		<div class="boxed">
+                        <p>&#160;&#160; Montant reçu:</p>
+                        <p>&#160;&#160; Date de réception du virement:</p>
+                        <p>&#160;&#160; Nom:</p>
+                        <p>&#160;&#160; Fonction:</p>
+                        <p>&#160;&#160; Signature:</p>
+                        <p>&#160;&#160; Date et cachet:</p>
+		</div>
+			<br></br><p>Nous vous remercions de bien vouloir nous retourner un exemplaire de ce document après l’avoir complété, et d’y joindre la photocopie de l’avis de crédit que vous recevrez de votre banque concernant cette opération.</p>
+			<br></br><b><strong><p style="margin-left: 500px;">Françoise Leclair</p></strong></b>
+        </div>
+
+                        </t>
+                </t>
+        </t>
+        </template>
+</odoo>

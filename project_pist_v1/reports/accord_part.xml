@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="report_accord">
+        <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                        <t t-call="web.external_layout">
+<style>
+table
+{
+  table-layout: fixed;
+  width: 100%;  
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+}
+</style>
+<tbody>
+        <div class="page">
+                        <center><h2><u><b>ACCORD DE PARTENARIAT</b></u></h2></center>
+		<br></br><h3><b><u>1. PRÉAMBULE</u></b></h3>
+			<p>Les aides accordées par la FondationRaoul Follereau (FRF) proviennent essentiellement de la collecte de dons privés. Leur distribution et leur utilisation sont ainsi effectuées avec un souci constant de transparence et d’efficience.<br></br></p>
+			<p>La FRF est un partenaire des acteurs de la santé et du développement. Elle les aide à réaliser leurs objectifs</p>
+       		<br></br><h3><b><u>2. DEMANDE D’AIDE</u></b></h3>
+			<p>La demande d’aide annuelle est adressée au ........................ (Représentant de la FRF ou Responsable du Département) au moyen du formulaire prévu à cet effetavant le 31 août de l’année précédente.<br></br></p>
+			<p>Dès l’approbation du budget, le bénéficiaire est informé de la nature et du montantde l’Aide qui lui est accordée par une lettre d’octroi. Le présent «Accord de partenariat» est signé avant toute remise de l’Aide.</p>
+                <br></br><h3><b><u>3. BÉNÉFICIAIRE</u></b></h3>
+                        <h4>NOM : </h4>
+			<h4>OBJET DU PROJET : </h4>
+	 
+		<br></br><h3><b><u>4. ENGAGEMENTS DU BÉNÉFICIAIRE</u></b></h3>
+			<h4><b>SUIVI DU PROJET</b></h4>
+			<p>Le bénéficiaire s’engage à produire tout justificatif financier et toute information demandée par la FRF.</p>
+			<p>Il s’engage à recevoir les responsables, représentants, contrôleursinternes ou auditeursde la FRF.</p>
+
+			<h4><b>RAPPORT D’ACTIVITÉ et RAPPORT FINANCIER</b></h4>
+			<p>Le bénéficiaire fournira avant le 15 février de chaque année le rapport technique etle rapport financier global du projet pour l’année écoulée (voir modèle joint au présent accord).</p>
+
+			<h4><b>COMMUNICATION</b></h4>
+			<p>Le bénéficiaire s’engage à communiquer à la FRF toute information publiée concernant le projet aidé et à faire référence de l’aide apportée par celle-ci. De même le bénéficiaire autorise la FRF à utiliser l’information transmise pour sa propre communication.</p>
+
+			<h4><b>VERSEMENT ET RÉCEPTIONDE L’AIDE</b></h4>
+			<p>Les fonds seront versés au compte ................... et feront l’objet d’un accusé de réception adressé au ........................... (Représentant de la FRF ou Responsable du Département)</p>
+			<p>Les biens, marchandises et médicaments achetés par la FRF seront remis contre un accusé de réception daté et signé.</p>
+
+			<h4><b>MODIFICATION</b></h4>
+			<p>Le bénéficiaire doit informer par écrit la FRF de toute intention de modification du projet induisant une utilisation des fonds ou des biens fournis par la FRF différente de celle initialement prévue. La FRF se réserve alors la faculté de l’agréer ou de la refuser.</p>
+			
+                <br></br><h3><b><u>5. ANNULATION ET CONDITIONS SUSPENSIVES</u></b></h3>
+                	<p>Le non respect par le bénéficiaire des obligations prévues dans l’accord de partenariat aboutira à l’annulation de l’aide.</p>
+               		<p>La FRF peut à tout moment annuler la poursuite du versement des fonds ou stopper la fourniture de biens pour les motifs suivants:</p>
+                 	<ul>
+                  		<li>Utilisation des fonds ou des biens non conforme à la destination contractuelle</li>
+                  		<li>Non respect des conditions stipulées dans l’accordde partenariat</li>
+                  		<li>Modification ou changement du projet non accepté par la FRF</li>
+                	</ul>
+                	<br></br>
+                	<p>La FRF sera dégagée de ses obligations contractuelles pour raison de force majeure, d’origine locale comme française ou internationale.</p>
+		<br></br><h3><b><u>6. INDEMNISATION</u></b></h3>
+			<p>La FRF ou son Représentant ne pourront être tenus responsables de quelques dommages ou préjudices occasionnés dans l’exercice de l’activité aidée.</p>
+		<br></br><h3><b><u>7. RÉSOLUTION DES CONFLITS</u></b></h3>
+			<p>Eu égard à la spécificité des relations et à la nature de l’aide, tout désaccord sur l’application du présent accord de partenariat devra trouver une solution amiable. Restant sauves les prérogatives de la FRF.</p>
+		</div>
+</tbody>
+<p style="page-break-before:always;"></p>
+		<br></br><h3><b><u>8. DURÉE</u></b></h3>
+			<p>Le présent accord de partenariat est signé pour une durée de........ (3 ans maxi)</p>
+		<table>
+		<thead>
+		<tr>
+			<th><b><center>Pour le Projet Bénéficiaire</center></b></th>
+		        <th><b><center>Pour la FRF</center></b></th>
+		</tr> 
+		</thead>
+		<tbody>
+  		<tr>
+       			<td><b>Nom et titre : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br></br><br></br><br></br><br></br><br></br><br></br></b></td>
+       			<td><b>Nom et titre : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br></br><br></br><br></br><br></br><br></br><br></br></b></td>
+   		</tr>
+   		<tr>
+       			<td><b>Signature : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br></br><br></br><br></br><br></br><br></br><br></br></b></td>
+       			<td><b>Signature : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br></br><br></br><br></br><br></br><br></br><br></br></b></td>
+   		</tr>
+   		<tr>
+       			<td><b>Date : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br></br><br></br><br></br><br></br><br></br><br></br></b></td>
+      		 	<td><b>Date : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br></br><br></br><br></br><br></br><br></br><br></br></b></td>
+   		</tr>
+		</tbody>
+		</table>
+                        </t>
+                </t>
+        </t>
+        </template>
+</odoo>

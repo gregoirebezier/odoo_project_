@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="report_accord_enft">
+        <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+<style>
+table
+{
+  table-layout: fixed;
+  width: 100%;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+}
+</style>
+<center><h2><u><b>FONDATION RAOUL FOLLEREAU/Aide aux enfants en détresse<br></br>ACCORD DE PARTENARIAT –Année 2016</b></u></h2></center>
+<br></br><br></br>
+<p>Un soutien financier vous est accordé au titre de l’année 2016, selon les modalités spécifiées ci-dessous que vous vous engagez à respecter.</p>
+<p>Nous vous saurions gré de compléter cet accord de partenariat et de nous le renvoyer par retour de courrier. L’envoi de fonds est conditionné par la bonne réception de ce document dûment régularisé.</p>
+
+<p>Partenaire / Projet</p>
+<hr></hr>
+<br></br><p> . </p><br></br>
+<p>Montant alloué / Utilisation des fonds</p>
+<hr></hr>
+<br></br><p> . </p><br></br><p> . </p><br></br><br></br>
+<p>Ce montant pourra, exceptionnellement, être revu à la baisse en cours d’année dans le cas où l’évolution de nos ressources l’imposerait.</p>
+<br></br>
+<p>Echéancier des versements</p>
+<hr></hr>
+<br></br><p> . </p><br></br><br></br>
+<p>Engagement du Partenaire</p>
+<hr></hr>
+
+<p>. Les fonds alloués sont impérativement destinés à la demande acceptée.Pour toute autre orientation, il est nécessaire de présenter une nouvelle demande.</p>
+<p>. Un exemplaire du formulaire «Avis d’envoi de fonds et Accusé de réception» est à compléter et à nous retourner à réception des fonds.</p>
+<p>. Les originaux des justificatifs des dépenses sont à conserver et à  tenir à la disposition de tout contrôle de la part de la Fondation Raoul Follereau.</p>
+<br></br>
+<p>Application des procédures de fonctionnement</p>
+<hr></hr>
+
+<p>. Pour mémoire, conférer «Fiche II –Application des procédures de fonctionnement» du dossier de demande d’aide que vous vous êtes engagés à respecter.</p>
+<p>. De plus, vous acceptez la diffusion que nous ferions des informations, photos, et autres documentationsque vous nous communiquez pour l’information de nos donateurs, sauf réserves précises de votre part.</p>
+<br></br><br></br><br></br><br></br>
+<table>
+<tbody>
+<tr>
+		<td><b><p style="margin-left: 10px;">Fondation Raoul Follereau<br></br> Aide aux enfants en détresse <br></br><br></br><br></br> Françoise Leclair<br></br><br></br> Paris,<br></br><br></br><br></br><br></br><br></br><br></br></p></b></td>
+		<td><b><p style="margin-left: 10px;"><br></br> Nom: <br></br><br></br> Signature:<br></br><br></br> Lieu et date: <br></br><br></br> Cachet:<br></br><br></br><br></br></p></b></td>
+</tr>
+</tbody>
+</table>
+		</t>
+	</t>
+	</template>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="report_lettre">
+        <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+<!--                        <t t-call="web.external_layout">-->
+<br></br><br></br><strong><p style="margin-left: 500px;">A<br></br>Sœur Noémi BOGUSLAWA SWIEBODA<br></br>Responsable de la Section Lèpre du<br></br>CHRP Kinsoundi<br></br>Brazzaville,</p></strong>
+<p style="margin-left: 500px;">Paris, le 3 mars <span t-field="doc.annee_actuel"/></p>
+<strong><p>Objet : Lettre d’octroi <span t-field="doc.annee_actuel"/></p></strong>
+<br></br><p>Chère Sœur Noémi,</p>
+<p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Conformément à la Convention signée avec le Ministère de la Santé et en réponse à votre demande au titre de l’année 2015, j’ai le plaisir de vous informer que la Fondation Raoul Follereau a décidé d’accorder une subvention de 17 563 249 FCFA pour le Centre Hospitalier Raymond Poaty de Kinsoundi, qui se répartit comme suit :</p>
+                <tr>
+                <br></br>
+                <td style="font-size:17px;">
+                <table class="table report_border">
+        <tbody>
+                <t t-foreach="doc.budget_list_lines" t-as="line">
+                <tr>
+                <td><p><span t-field="line.zone_text"/> : </p></td>
+		<td><p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p></td>
+                <td><p><span t-esc="line.valider" t-esc-options='{"widget": "monetary", "display_currency": "o.currency"}'/> €</p></td>
+<!--            <td><span t-field="line.demande" t-field-options="{'widget':'monetary'}"/></td>
+                <td><span t-field="line.depasser" t-field-options="{'widget':'monetary'}"/></td>
+-->                </tr>
+        </t>
+        </tbody>
+        </table>
+                </td>
+                </tr>
+
+<p>		Je vous remercie de me faire parvenir dès que possible votre commande de médicaments et consommables, afin de permettre leur commande par notre centrale d’achats Follereau logistique.</p>
+<p>		Les autres financements seront versés semestriellement par nos soins sur votre compte bancaire.</p>
+<p>		Nous avons bien reçu le récapitulatif de l’utilisation des fonds ainsi que les justificatifs des dépenses qui ont été engagées à hauteur de la subvention que nous vous avons versée au titre de l’année 2014 et nous vous en remercions.</p>
+<p>		Par ailleurs, j’ai le plaisir de vous informer que la Fondation vous alloue également, comme les précédentes années, une somme de 2 000 000 FCFA pour vos œuvres sociales via la Paroisse Saint-François.</p>
+<p>		En espérant avoir répondu ainsi à votre attente, je vous prie d’agréer, chère Sœur Noémi, l’expression de mes sentiments les meilleurs.</p>
+<p style="margin-left: 500px;">Bénédicte de Charette</p>
+<p style="margin-left: 350px;">Département Aide aux Lépreux et Programmes de Santé</p>
+			</t>
+		</t>
+	
+	</template>
+</odoo>
