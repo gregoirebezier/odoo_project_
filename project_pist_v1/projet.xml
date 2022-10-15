@@ -514,14 +514,13 @@
         </field>
     </record>
 	<!-- inherit du modele Document pour lier les deux modules-->
-        <record model="ir.actions.act_window" id="open_document">
+	<!--         <record model="ir.actions.act_window" id="open_document">
             <field name="name">Documents</field>
             <field name="res_model">document</field>
             <field name="view_mode">tree,form,pivot,graph,search</field>
 	    <field name="domain">[]</field>
 	   <field name="context">{}</field>
-    </record>
-
+    </record> -->
 	<!-- creation visuel de l'application ainsi que le menu projet-->
 	<menuitem id="projet_projet" name="Projets" sequence="0"/>
 	<menuitem id="projet_date" name="Créer" parent="projet_projet" action="action_projet_button"/>

@@ -81,32 +81,32 @@ class projet_contact(models.Model):
 
 #voici les deux fonctions pour avoir le nombre de beneficiaires par annee passee
     def nbr_indirect_passee(self):
-        self.indirect_nbr = 0
+        self.indirect_nbr_passee = 0
         for rec in self:
             for beneficiaire in rec.beneficiaire_list_lines:
-                if (beneficiaire.type == "indirect" and beneficiaire.annee == str(date_to))
-                    self.indirect_nbr += 1
+                if (beneficiaire.type == "indirect" and beneficiaire.annee == str(rec.date_to)):
+                    self.indirect_nbr_passee += 1
 #voici les deux fonctions pour avoir le nombre de beneficiaires par annee passee
     def nbr_direct_passee(self):
-        self.direct_nbr = 0
+        self.direct_nbr_passee = 0
         for rec in self:
             for beneficiaire in rec.beneficiaire_list_lines:
-                if (beneficiaire.type == "direct" and beneficiaire.annee == str(date_to))
-                    self.direct_nbr += 1
+                if (beneficiaire.type == "direct" and beneficiaire.annee == str(rec.date_to)):
+                    self.direct_nbr_passee += 1
 #voici les deux fonctions pour avoir le nombre de beneficiaires par annee actuel
     def nbr_indirect_present(self):
-        self.indirect_nbr = 0
+        self.indirect_nbr_present = 0
         for rec in self:
             for beneficiaire in rec.beneficiaire_list_lines:
-                if (beneficiaire.type == "indirect" and beneficiaire.annee == str(annee_actuel))
-                    self.indirect_nbr += 1
+                if (beneficiaire.type == "indirect" and beneficiaire.annee == str(rec.annee_actuel)):
+                    self.indirect_nbr_present += 1
 #voici les deux fonctions pour avoir le nombre de beneficiaires par annee actuel
     def nbr_direct_present(self):
-        self.direct_nbr = 0
+        self.direct_nbr_present = 0
         for rec in self:
             for beneficiaire in rec.beneficiaire_list_lines:
-                if (beneficiaire.type == "direct" and beneficiaire.annee == str(annee_actuel))
-                    self.direct_nbr += 1
+                if (beneficiaire.type == "direct" and beneficiaire.annee == str(rec.annee_actuel)):
+                    self.direct_nbr_present += 1
 
 
     def verse_2020(self):
